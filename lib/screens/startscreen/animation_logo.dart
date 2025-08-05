@@ -48,9 +48,9 @@ class _AnimatedLogoState extends State<AnimatedLogo>
             borderRadius: BorderRadius.circular(28),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.4),
+                color: const Color.fromRGBO(0, 0, 0, 1).withOpacity(0.4),
                 offset: const Offset(0, 12),
-                blurRadius: 24,
+                blurRadius: 30,
                 spreadRadius: 2,
               ),
             ],

@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
       title: 'NOTEkey App',
       theme: ThemeData(
         useMaterial3: true,
-        scaffoldBackgroundColor: const Color(0xFFF0E7DE),
+        scaffoldBackgroundColor: const Color.fromRGBO(240, 231, 222, 1),
       ),
       home: const StartScreen(),
     );

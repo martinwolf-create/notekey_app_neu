@@ -10,7 +10,7 @@ class SignupButton extends StatelessWidget {
         Navigator.pushNamed(context, "/signup");
       },
       style: ElevatedButton.styleFrom(
-        backgroundColor: const Color(0xFF30241B),
+        backgroundColor: const Color.fromRGBO(48, 36, 27, 1),
         padding: const EdgeInsets.symmetric(horizontal: 48, vertical: 16),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
@@ -20,7 +20,7 @@ class SignupButton extends StatelessWidget {
       child: const Text(
         "Sign up",
         style: TextStyle(
-          color: Colors.white,
+          color: Color.fromRGBO(255, 255, 255, 1),
           fontSize: 18,
           fontWeight: FontWeight.w600,
         ),

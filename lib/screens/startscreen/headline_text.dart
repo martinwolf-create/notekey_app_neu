@@ -9,7 +9,7 @@ class HeadlineText extends StatelessWidget {
       "A MUSIC COMMUNITY",
       style: TextStyle(
         fontSize: 16,
-        color: Color(0xFF30241B),
+        color: Color.fromRGBO(48, 36, 27, 1),
         letterSpacing: 1.2,
         fontWeight: FontWeight.w500,
       ),
