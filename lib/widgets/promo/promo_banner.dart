@@ -16,9 +16,9 @@ class _PromoBannerState extends State<PromoBanner> {
     '🎉 OUT NOW: 20 % auf deinen Premium Account!',
     '🧠 NEW: NOTEkey Memory jetzt verfügbar!',
     '🤖 Spiele gegen andere User oder den Computer!',
-    '📣 Mehr lernen, mehr erreichen – mit NOTEkey!',
+    '🌏 Mehr lernen, mehr erreichen – mit NOTEkey!',
   ];
-
+  //https://emojipedia.org/
   @override
   void initState() {
     super.initState();
