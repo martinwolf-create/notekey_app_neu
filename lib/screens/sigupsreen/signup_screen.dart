@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:notekey_app/routes/app_routes.dart';
+
 import 'package:notekey_app/themes/colors.dart';
 import 'package:notekey_app/themes/launch_url.dart';
 import 'package:notekey_app/widgets/common/custom_button.dart';
 import 'package:notekey_app/widgets/common/custom_textfield.dart';
 import 'package:notekey_app/widgets/common/forgot_password_link.dart';
+import 'package:notekey_app/screens/homescreen/home_screen.dart';
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});
@@ -57,7 +60,9 @@ class SignUpScreen extends StatelessWidget {
               const SizedBox(height: 16),
               CustomButton(
                 label: "Sign up",
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushReplacementNamed(context, AppRoutes.home);
+                },
               ),
               const SizedBox(height: 24),
               Row(

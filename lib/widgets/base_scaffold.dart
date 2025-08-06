@@ -12,7 +12,11 @@ class BaseScaffold extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color.fromRGBO(255, 249, 243, 1),
       drawer: const HamburgerButton(),
-      appBar: const BasicTopBar(),
+      appBar: const BasicTopBar(
+        title: 'NOTEkey',
+        showBack: false,
+        showMenu: true,
+      ),
       body: child,
     );
   }
