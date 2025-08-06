@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:notekey_app/widgets/topbar/basic_topbar.dart';
-import 'package:notekey_app/widgets/topbar/back_button.dart';
+import 'package:notekey_app/themes/colors.dart';
+import 'package:notekey_app/themes/launch_url.dart';
 import 'animation_logo.dart';
 import 'signup_button.dart';
 import 'headline_text.dart';
-import 'package:notekey_app/themes/launch_url.dart';
 
 class StartScreen extends StatelessWidget {
   const StartScreen({super.key});
@@ -12,8 +11,7 @@ class StartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const BasicTopBar(),
-      backgroundColor: const Color.fromRGBO(240, 231, 222, 1),
+      backgroundColor: AppColors.hellbeige,
       body: SafeArea(
         child: Center(
           child: Column(
@@ -31,7 +29,7 @@ class StartScreen extends StatelessWidget {
                   "NOTEkey.de",
                   style: TextStyle(
                     decoration: TextDecoration.underline,
-                    color: Color.fromRGBO(48, 36, 27, 1),
+                    color: AppColors.dunkelbraun,
                     fontSize: 14,
                   ),
                 ),

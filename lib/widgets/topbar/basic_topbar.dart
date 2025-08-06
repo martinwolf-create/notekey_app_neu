@@ -1,29 +1,44 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class BasicTopBar extends StatelessWidget implements PreferredSizeWidget {
-  const BasicTopBar({super.key});
+  final EdgeInsets titlePadding;
+
+  const BasicTopBar({
+    super.key,
+    this.titlePadding = const EdgeInsets.only(top: 12),
+  });
 
   @override
   Widget build(BuildContext context) {
-    return AppBar(
-      leading: const BackButton(
-        color: Color.fromRGBO(255, 249, 243, 1),
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(
+        statusBarColor: Color(0xFF30241B),
+        statusBarIconBrightness: Brightness.light,
+        statusBarBrightness: Brightness.dark,
       ),
-      backgroundColor: const Color.fromRGBO(48, 36, 27, 1),
-      elevation: 0,
-      centerTitle: true,
-      title: const Text(
-        'NOTEkey',
-        style: TextStyle(
-          color: Color.fromRGBO(255, 249, 243, 1),
-          fontSize: 20,
-          fontWeight: FontWeight.bold,
-          letterSpacing: 1.2,
+    );
+
+    return Container(
+      color: const Color(0xFF30241B),
+      padding: const EdgeInsets.only(top: 36),
+      height: kToolbarHeight + 36,
+      child: Padding(
+        padding: titlePadding,
+        child: const Center(
+          child: Text(
+            'NOTEkey',
+            style: TextStyle(
+              color: Color(0xFFF0E7DE),
+              fontSize: 20,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
         ),
       ),
     );
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight + 36);
 }
