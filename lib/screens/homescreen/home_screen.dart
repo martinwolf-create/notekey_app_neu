@@ -3,6 +3,7 @@ import 'package:notekey_app/themes/colors.dart';
 import 'package:notekey_app/widgets/topbar/basic_topbar.dart';
 import 'package:notekey_app/widgets/bottom_nav/bottom_navigation_bar.dart';
 import 'package:notekey_app/themes/launch_url.dart';
+import 'package:notekey_app/widgets/promo/promo_banner.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
@@ -34,24 +35,7 @@ class HomeScreen extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.symmetric(vertical: 20),
-              decoration: BoxDecoration(
-                color: AppColors.hellbeige,
-                borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: AppColors.dunkelbraun, width: 1.5),
-              ),
-              child: const Text(
-                'Aktuelle Info\nzum User',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w600,
-                  color: AppColors.schwarz,
-                ),
-              ),
-            ),
+            const PromoBanner(),
             const SizedBox(height: 20),
             SizedBox(
               height: 90,
