@@ -13,7 +13,7 @@ class _PromoBannerState extends State<PromoBanner> {
   int _currentPage = 0;
 
   final List<String> banners = [
-    '🎉 OUT NOW: 20 % auf deinen Premium Account!',
+    '🎉 OUT NOW: 20% auf deinen Premium Account!',
     '🧠 NEW: NOTEkey Memory jetzt verfügbar!',
     '🤖 Spiele gegen andere User oder den Computer!',
     '🌏 Mehr lernen, mehr erreichen – mit NOTEkey!',
