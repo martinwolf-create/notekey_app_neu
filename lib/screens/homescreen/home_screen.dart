@@ -60,11 +60,11 @@ class HomeScreen extends StatelessWidget {
                 },
               ),
             ),
-            const SizedBox(height: 28),
+            const SizedBox(height: 40),
             Wrap(
               alignment: WrapAlignment.center,
-              spacing: 20,
-              runSpacing: 20,
+              spacing: 40,
+              runSpacing: 40,
               children: [
                 buildDarkButton('Chat'),
                 buildDarkButton('Game'),
@@ -94,8 +94,8 @@ class HomeScreen extends StatelessWidget {
 
   Widget buildDarkButton(String label) {
     return Container(
-      width: 130,
-      height: 50,
+      width: 160,
+      height: 80,
       decoration: BoxDecoration(
         color: AppColors.dunkelbraun,
         borderRadius: BorderRadius.circular(10),
