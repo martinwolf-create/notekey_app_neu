@@ -49,8 +49,8 @@ class _PromoBannerState extends State<PromoBanner> {
         border: Border.all(
             color: const Color.fromARGB(255, 184, 103, 22), width: 1.4),
       ),
-      height: 100,
-      width: double.infinity,
+      height: 140,
+      width: 650,
       child: PageView.builder(
         controller: _controller,
         itemCount: banners.length,
