@@ -22,7 +22,6 @@ class _SplashTheaterScreenState extends State<SplashTheaterScreen>
   void initState() {
     super.initState();
 
-    // Text A (von links, stoppt, zurück nach links)
     _controllerA = AnimationController(
       duration: const Duration(seconds: 3),
       vsync: this,
@@ -49,7 +48,6 @@ class _SplashTheaterScreenState extends State<SplashTheaterScreen>
       ),
     ]).animate(_controllerA);
 
-    // Text B (von rechts, stoppt, zurück nach rechts)
     _controllerB = AnimationController(
       duration: const Duration(seconds: 3),
       vsync: this,
@@ -76,11 +74,9 @@ class _SplashTheaterScreenState extends State<SplashTheaterScreen>
       ),
     ]).animate(_controllerB);
 
-    // Start both animations
     _controllerA.forward();
     _controllerB.forward();
 
-    // Timer für Screenwechsel (nach exakt 3 Sekunden)
     Timer(const Duration(seconds: 3), () {
       Navigator.of(context).pushReplacement(
         PageRouteBuilder(
