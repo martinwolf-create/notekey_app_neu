@@ -12,45 +12,81 @@ class SplashTheaterScreen extends StatefulWidget {
 
 class _SplashTheaterScreenState extends State<SplashTheaterScreen>
     with TickerProviderStateMixin {
-  late final AnimationController _controller;
-  static const int lineCount = 25;
-  final Duration totalDuration = const Duration(seconds: 4);
-  final List<Animation<Offset>> _animationsA = [];
-  final List<Animation<Offset>> _animationsB = [];
+  late AnimationController _controllerA;
+  late Animation<Offset> _animationA;
+
+  late AnimationController _controllerB;
+  late Animation<Offset> _animationB;
 
   @override
   void initState() {
     super.initState();
 
-    _controller = AnimationController(vsync: this, duration: totalDuration);
+    // Text A (von links, stoppt, zurück nach links)
+    _controllerA = AnimationController(
+      duration: const Duration(seconds: 3),
+      vsync: this,
+    );
 
-    for (int i = 0; i < lineCount; i++) {
-      double delay = (i * 0.015);
-      double start = delay;
-      double end = (delay + 0.7).clamp(0.0, 1.0);
+    _animationA = TweenSequence<Offset>([
+      TweenSequenceItem(
+        tween: Tween<Offset>(
+          begin: const Offset(-1.5, 0),
+          end: const Offset(0, 0),
+        ).chain(CurveTween(curve: Curves.easeOut)),
+        weight: 40,
+      ),
+      TweenSequenceItem(
+        tween: ConstantTween<Offset>(const Offset(0, 0)),
+        weight: 20,
+      ),
+      TweenSequenceItem(
+        tween: Tween<Offset>(
+          begin: const Offset(0, 0),
+          end: const Offset(-1.5, 0),
+        ).chain(CurveTween(curve: Curves.easeIn)),
+        weight: 40,
+      ),
+    ]).animate(_controllerA);
 
-      _animationsA.add(Tween<Offset>(
-        begin: const Offset(-1.5, 0),
-        end: const Offset(0, 0),
-      )
-          .chain(CurveTween(curve: Interval(start, end, curve: Curves.easeOut)))
-          .animate(_controller));
+    // Text B (von rechts, stoppt, zurück nach rechts)
+    _controllerB = AnimationController(
+      duration: const Duration(seconds: 3),
+      vsync: this,
+    );
 
-      _animationsB.add(Tween<Offset>(
-        begin: const Offset(1.5, 0),
-        end: const Offset(0, 0),
-      )
-          .chain(CurveTween(curve: Interval(start, end, curve: Curves.easeOut)))
-          .animate(_controller));
-    }
+    _animationB = TweenSequence<Offset>([
+      TweenSequenceItem(
+        tween: Tween<Offset>(
+          begin: const Offset(1.5, 0),
+          end: const Offset(0, 0),
+        ).chain(CurveTween(curve: Curves.easeOut)),
+        weight: 40,
+      ),
+      TweenSequenceItem(
+        tween: ConstantTween<Offset>(const Offset(0, 0)),
+        weight: 20,
+      ),
+      TweenSequenceItem(
+        tween: Tween<Offset>(
+          begin: const Offset(0, 0),
+          end: const Offset(1.5, 0),
+        ).chain(CurveTween(curve: Curves.easeIn)),
+        weight: 40,
+      ),
+    ]).animate(_controllerB);
 
-    _controller.forward();
+    // Start both animations
+    _controllerA.forward();
+    _controllerB.forward();
 
-    Timer(totalDuration + const Duration(milliseconds: 800), () {
+    // Timer für Screenwechsel (nach exakt 3 Sekunden)
+    Timer(const Duration(seconds: 3), () {
       Navigator.of(context).pushReplacement(
         PageRouteBuilder(
-          transitionDuration: Duration.zero,
           pageBuilder: (_, __, ___) => const StartScreen(),
+          transitionDuration: Duration.zero,
+          reverseTransitionDuration: Duration.zero,
         ),
       );
     });
@@ -58,56 +94,50 @@ class _SplashTheaterScreenState extends State<SplashTheaterScreen>
 
   @override
   void dispose() {
-    _controller.dispose();
+    _controllerA.dispose();
+    _controllerB.dispose();
     super.dispose();
-  }
-
-  Widget buildLine(int index) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        SlideTransition(
-          position: _animationsA[index],
-          child: Text(
-            'NOTEkey',
-            style: const TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-              color: AppColors.hellbeige,
-            ),
-          ),
-        ),
-        const SizedBox(width: 12),
-        SlideTransition(
-          position: _animationsB[index],
-          child: Text(
-            'the Music community',
-            style: const TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w400,
-              color: AppColors.hellbeige,
-            ),
-          ),
-        ),
-      ],
-    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.dunkelbraun,
-      body: Center(
-        child: ListView.builder(
-          physics: const NeverScrollableScrollPhysics(),
-          itemCount: lineCount,
-          itemBuilder: (context, index) {
-            return Padding(
-              padding: const EdgeInsets.symmetric(vertical: 4.0),
-              child: buildLine(index),
-            );
-          },
-        ),
+      body: Stack(
+        children: [
+          Center(
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                SlideTransition(
+                  position: _animationA,
+                  child: Text(
+                    'NOTEkey',
+                    style: TextStyle(
+                      fontSize: 42,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.hellbeige,
+                    ),
+                  ),
+                ),
+                SlideTransition(
+                  position: _animationB,
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 60),
+                    child: Text(
+                      'the Music community',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w400,
+                        color: AppColors.hellbeige,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
