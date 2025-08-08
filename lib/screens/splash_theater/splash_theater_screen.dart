@@ -111,7 +111,7 @@ class _SplashTheaterScreenState extends State<SplashTheaterScreen>
                 SlideTransition(
                   position: _animationA,
                   child: Text(
-                    'NOTEkey',
+                    "NOTEkey",
                     style: TextStyle(
                       fontSize: 42,
                       fontWeight: FontWeight.bold,
@@ -124,7 +124,7 @@ class _SplashTheaterScreenState extends State<SplashTheaterScreen>
                   child: Padding(
                     padding: const EdgeInsets.only(top: 60),
                     child: Text(
-                      'the Music community',
+                      "the Music community",
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w400,
