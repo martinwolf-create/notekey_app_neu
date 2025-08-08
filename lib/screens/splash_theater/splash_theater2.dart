@@ -1,28 +1,34 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:notekey_app/routes/app_routes.dart';
+import 'package:notekey_app/screens/startscreen/startscreen.dart';
 import 'package:notekey_app/themes/colors.dart';
 
-class SplashTheaterScreen extends StatefulWidget {
-  const SplashTheaterScreen({super.key});
+class SplashTheater2Screen extends StatefulWidget {
+  const SplashTheater2Screen({super.key});
 
   @override
-  State<SplashTheaterScreen> createState() => _SplashTheaterScreenState();
+  State<SplashTheater2Screen> createState() => _SplashTheater2ScreenState();
 }
 
-class _SplashTheaterScreenState extends State<SplashTheaterScreen>
+class _SplashTheater2ScreenState extends State<SplashTheater2Screen>
     with TickerProviderStateMixin {
   late AnimationController _controllerA;
-  late Animation<Offset> _animationA;
-
   late AnimationController _controllerB;
+  late Animation<Offset> _animationA;
   late Animation<Offset> _animationB;
+
+  final int lineCount = 34;
 
   @override
   void initState() {
     super.initState();
 
     _controllerA = AnimationController(
+      duration: const Duration(seconds: 3),
+      vsync: this,
+    );
+
+    _controllerB = AnimationController(
       duration: const Duration(seconds: 3),
       vsync: this,
     );
@@ -47,11 +53,6 @@ class _SplashTheaterScreenState extends State<SplashTheaterScreen>
         weight: 40,
       ),
     ]).animate(_controllerA);
-
-    _controllerB = AnimationController(
-      duration: const Duration(seconds: 3),
-      vsync: this,
-    );
 
     _animationB = TweenSequence<Offset>([
       TweenSequenceItem(
@@ -78,7 +79,12 @@ class _SplashTheaterScreenState extends State<SplashTheaterScreen>
     _controllerB.forward();
 
     Timer(const Duration(seconds: 3), () {
-      Navigator.pushReplacementNamed(context, AppRoutes.start);
+      Navigator.of(context).pushReplacement(
+        PageRouteBuilder(
+          transitionDuration: Duration.zero,
+          pageBuilder: (_, __, ___) => const StartScreen(),
+        ),
+      );
     });
   }
 
@@ -89,45 +95,52 @@ class _SplashTheaterScreenState extends State<SplashTheaterScreen>
     super.dispose();
   }
 
+  Widget buildTheaterLine() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        SlideTransition(
+          position: _animationA,
+          child: Text(
+            'NOTEkey',
+            style: const TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+              color: AppColors.hellbeige,
+            ),
+          ),
+        ),
+        const SizedBox(width: 12),
+        SlideTransition(
+          position: _animationB,
+          child: Text(
+            'the Music community',
+            style: const TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w400,
+              color: AppColors.hellbeige,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.dunkelbraun,
-      body: Stack(
-        children: [
-          Center(
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-                SlideTransition(
-                  position: _animationA,
-                  child: Text(
-                    'NOTEkey',
-                    style: TextStyle(
-                      fontSize: 42,
-                      fontWeight: FontWeight.bold,
-                      color: AppColors.hellbeige,
-                    ),
-                  ),
-                ),
-                SlideTransition(
-                  position: _animationB,
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 60),
-                    child: Text(
-                      'the Music community',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w400,
-                        color: AppColors.hellbeige,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
+      body: Center(
+        child: ListView.builder(
+          itemCount: lineCount,
+          physics: const NeverScrollableScrollPhysics(),
+          itemBuilder: (context, index) {
+            return Padding(
+              padding: const EdgeInsets.symmetric(vertical: 4),
+              child: buildTheaterLine(),
+            );
+          },
+        ),
       ),
     );
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:notekey_app/screens/splash_theater/splash_theater_screen.dart';
+import 'package:notekey_app/screens/splash_theater/splash_theater2.dart';
 
 import 'package:notekey_app/screens/homescreen/home_screen.dart';
 import 'package:notekey_app/screens/startscreen/startscreen.dart';
@@ -7,9 +8,11 @@ import 'package:notekey_app/screens/sigupsreen/signup_screen.dart';
 
 class AppRoutes {
   static const String splash = "/splash";
+  static const String splash2 = "/splash2";
 
   static const String start = "/start";
   static const String signup = "/signup";
+
   static const String home = "/home";
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
