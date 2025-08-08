@@ -31,7 +31,7 @@ class _SplashTheaterScreenState extends State<SplashTheaterScreen>
     _animationA = TweenSequence<Offset>([
       TweenSequenceItem(
         tween: Tween<Offset>(
-          begin: const Offset(-1.5, 0),
+          begin: const Offset(-2.0, 0),
           end: const Offset(0, 0),
         ).chain(CurveTween(curve: Curves.easeOut)),
         weight: 40,
@@ -43,7 +43,7 @@ class _SplashTheaterScreenState extends State<SplashTheaterScreen>
       TweenSequenceItem(
         tween: Tween<Offset>(
           begin: const Offset(0, 0),
-          end: const Offset(-1.5, 0),
+          end: const Offset(-2.0, 0),
         ).chain(CurveTween(curve: Curves.easeIn)),
         weight: 40,
       ),
