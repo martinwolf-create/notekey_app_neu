@@ -48,6 +48,13 @@ class _PromoBannerState extends State<PromoBanner> {
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
             color: const Color.fromARGB(255, 184, 103, 22), width: 1.4),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.3),
+            blurRadius: 6,
+            offset: Offset(3, 3),
+          ),
+        ],
       ),
       height: 140,
       width: 600,
@@ -59,7 +66,7 @@ class _PromoBannerState extends State<PromoBanner> {
             child: Text(
               banners[index],
               textAlign: TextAlign.center,
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w600,
                 color: AppColors.hellbeige,
