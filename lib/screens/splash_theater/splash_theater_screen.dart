@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:notekey_app/routes/app_routes.dart';
 import 'package:notekey_app/themes/colors.dart';
+import 'package:notekey_app/screens/startscreen/startscreen.dart';
 
 class SplashTheaterScreen extends StatefulWidget {
   const SplashTheaterScreen({super.key});
@@ -56,7 +57,7 @@ class _SplashTheaterScreenState extends State<SplashTheaterScreen>
     _animationB = TweenSequence<Offset>([
       TweenSequenceItem(
         tween: Tween<Offset>(
-          begin: const Offset(1.5, 0),
+          begin: const Offset(2, 0),
           end: const Offset(0, 0),
         ).chain(CurveTween(curve: Curves.easeOut)),
         weight: 40,
@@ -68,7 +69,7 @@ class _SplashTheaterScreenState extends State<SplashTheaterScreen>
       TweenSequenceItem(
         tween: Tween<Offset>(
           begin: const Offset(0, 0),
-          end: const Offset(1.5, 0),
+          end: const Offset(2, 0),
         ).chain(CurveTween(curve: Curves.easeIn)),
         weight: 40,
       ),
@@ -77,8 +78,16 @@ class _SplashTheaterScreenState extends State<SplashTheaterScreen>
     _controllerA.forward();
     _controllerB.forward();
 
-    Timer(const Duration(seconds: 3), () {
-      Navigator.pushReplacementNamed(context, AppRoutes.start);
+    Timer(const Duration(seconds: 4), () {
+      Navigator.pushReplacement(
+        context,
+        PageRouteBuilder(
+          pageBuilder: (context, animation, secondaryAnimation) =>
+              const StartScreen(),
+          transitionDuration: Duration.zero,
+          reverseTransitionDuration: Duration.zero,
+        ),
+      );
     });
   }
 

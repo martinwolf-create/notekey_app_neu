@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:notekey_app/screens/homescreen/home_screen.dart';
 import 'package:notekey_app/screens/startscreen/startscreen.dart';
 import 'package:notekey_app/themes/colors.dart';
 
@@ -82,7 +83,7 @@ class _SplashTheater2ScreenState extends State<SplashTheater2Screen>
       Navigator.of(context).pushReplacement(
         PageRouteBuilder(
           transitionDuration: Duration.zero,
-          pageBuilder: (_, __, ___) => const StartScreen(),
+          pageBuilder: (_, __, ___) => HomeScreen(),
         ),
       );
     });

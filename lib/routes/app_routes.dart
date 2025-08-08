@@ -24,6 +24,9 @@ class AppRoutes {
         return MaterialPageRoute(builder: (_) => const StartScreen());
       case signup:
         return MaterialPageRoute(builder: (_) => const SignUpScreen());
+
+      case splash2:
+        return MaterialPageRoute(builder: (_) => const SplashTheater2Screen());
       case home:
         return MaterialPageRoute(builder: (_) => HomeScreen());
 

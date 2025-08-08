@@ -50,7 +50,7 @@ class _PromoBannerState extends State<PromoBanner> {
             color: const Color.fromARGB(255, 184, 103, 22), width: 1.4),
       ),
       height: 140,
-      width: 800.0,
+      width: 600,
       child: PageView.builder(
         controller: _controller,
         itemCount: banners.length,
