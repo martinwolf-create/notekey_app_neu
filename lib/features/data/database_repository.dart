@@ -1,3 +1,5 @@
+import 'package:notekey_app/features/data/notekey_db.dart';
+
 // Diese Mock-Datenbank dient nur zum Testen.
 // Alle Daten werden nur im Speicher gehalten und gehen beim Neustart verloren.
 

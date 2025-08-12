@@ -1,3 +1,4 @@
+
 // Egal für welche Datenbank wir uns entscheiden,
 // unsere App braucht diese Methoden, um Nachrichten,
 // Posts, Events, Freundeslisten und Benachrichtigungen zu verwalten.
