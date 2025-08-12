@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:notekey_app/themes/colors.dart';
-import 'package:notekey_app/themes/launch_url.dart';
+import 'package:notekey_app/features/themes/colors.dart';
+import 'package:notekey_app/features/themes/launch_url.dart';
 import 'animation_logo.dart';
 import 'signup_button.dart';
 import 'headline_text.dart';

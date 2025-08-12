@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:notekey_app/screens/splash_theater/splash_theater_screen.dart';
-import 'package:notekey_app/screens/splash_theater/splash_theater2.dart';
+import 'package:notekey_app/features/presentation/screens/splash_theater/splash_theater_screen.dart';
+import 'package:notekey_app/features/presentation/screens/splash_theater/splash_theater2.dart';
 
-import 'package:notekey_app/screens/homescreen/home_screen.dart';
-import 'package:notekey_app/screens/startscreen/startscreen.dart';
-import 'package:notekey_app/screens/sigupsreen/signup_screen.dart';
+import 'package:notekey_app/features/presentation/screens/homescreen/home_screen.dart';
+import 'package:notekey_app/features/presentation/screens/startscreen/startscreen.dart';
+import 'package:notekey_app/features/presentation/screens/sigupsreen/signup_screen.dart';
 
 class AppRoutes {
   static const String splash = "/splash";

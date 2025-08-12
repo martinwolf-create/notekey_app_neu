@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:notekey_app/routes/app_routes.dart';
-import 'package:notekey_app/themes/colors.dart';
-import 'package:notekey_app/screens/startscreen/startscreen.dart';
+import 'package:notekey_app/features/routes/app_routes.dart';
+import 'package:notekey_app/features/themes/colors.dart';
+import 'package:notekey_app/features/presentation/screens/startscreen/startscreen.dart';
 
 class SplashTheaterScreen extends StatefulWidget {
   const SplashTheaterScreen({super.key});

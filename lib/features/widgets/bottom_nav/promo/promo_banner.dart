@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:notekey_app/themes/colors.dart';
+import 'package:notekey_app/features/themes/colors.dart';
 
 class PromoBanner extends StatefulWidget {
   const PromoBanner({super.key});

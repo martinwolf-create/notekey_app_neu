@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:notekey_app/themes/colors.dart';
+import 'package:notekey_app/features/themes/colors.dart';
 
 class BasicTopBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
