@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'features/routes/app_routes.dart';
-import 'features/data/database_repository.dart';
 
 void main() {
   runApp(const MyApp());
