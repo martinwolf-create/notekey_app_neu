@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:notekey_app/features/presentation/screens/profil/profil_screen.dart';
 import 'package:notekey_app/features/presentation/screens/splash_theater/splash_theater_screen.dart';
 import 'package:notekey_app/features/presentation/screens/splash_theater/splash_theater2.dart';
 
@@ -14,6 +15,7 @@ class AppRoutes {
   static const String signup = "/signup";
 
   static const String home = "/home";
+  static const String profil = "/profil";
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -29,6 +31,8 @@ class AppRoutes {
         return MaterialPageRoute(builder: (_) => const SplashTheater2Screen());
       case home:
         return MaterialPageRoute(builder: (_) => HomeScreen());
+      case profil:
+        return MaterialPageRoute(builder: (_) => ProfilScreen());
 
       default:
         return MaterialPageRoute(

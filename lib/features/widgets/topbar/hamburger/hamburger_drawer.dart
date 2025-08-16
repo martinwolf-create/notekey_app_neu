@@ -33,7 +33,7 @@ class HamburgerDrawer extends StatelessWidget {
               // Menü schließen
               Navigator.of(context).maybePop();
               // Zur Startanimation
-              Navigator.pushReplacementNamed(context, AppRoutes.start);
+              Navigator.pushReplacementNamed(context, AppRoutes.splash);
             },
           ),
         ],
