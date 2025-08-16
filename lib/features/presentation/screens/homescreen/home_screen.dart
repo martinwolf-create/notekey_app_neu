@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:notekey_app/features/themes/colors.dart';
-import 'package:notekey_app/features/widgets/bottom_nav/topbar/basic_topbar.dart';
+import 'package:notekey_app/features/widgets/topbar/basic_topbar.dart';
 import 'package:notekey_app/features/widgets/bottom_nav/bottom_navigation_bar.dart';
-import 'package:notekey_app/features/themes/launch_url.dart';
-import 'package:notekey_app/features/widgets/bottom_nav/promo/promo_banner.dart';
+import 'package:notekey_app/features/widgets/auth/launch_url.dart';
+import 'package:notekey_app/features/widgets/promo/promo_banner.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});

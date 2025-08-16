@@ -1,94 +1,71 @@
 import 'package:flutter/material.dart';
 import 'package:notekey_app/features/routes/app_routes.dart';
-
 import 'package:notekey_app/features/themes/colors.dart';
-import 'package:notekey_app/features/themes/launch_url.dart';
-import 'package:notekey_app/features/widgets/bottom_nav/common/custom_button.dart';
-import 'package:notekey_app/features/widgets/bottom_nav/common/custom_textfield.dart';
-import 'package:notekey_app/features/widgets/bottom_nav/common/forgot_password_link.dart';
-import 'package:notekey_app/features/presentation/screens/homescreen/home_screen.dart';
+
+import 'package:notekey_app/features/widgets/common/custom_button.dart';
+import 'package:notekey_app/features/widgets/common/custom_textfield.dart';
+
+import 'package:notekey_app/features/widgets/auth/forgot_password_link.dart';
+import 'package:notekey_app/features/widgets/auth/auth_scaffold.dart';
+import 'package:notekey_app/features/widgets/auth/auth_title.dart';
+import 'package:notekey_app/features/widgets/auth/social_login_row.dart';
+
+import 'package:notekey_app/features/widgets/auth/launch_url.dart';
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});
 
-  void _showForgotPasswordDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text("Passwort vergessen"),
-        content: const Text(
-          "Bitte E-Mail oder Telefonnummer eingeben, um das Passwort zurückzusetzen.",
-        ),
-        actions: [
-          TextButton(
-            child: const Text("OK"),
-            onPressed: () => Navigator.of(context).pop(),
-          ),
-        ],
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return AuthScaffold(
       backgroundColor: AppColors.hellbeige,
-      body: SafeArea(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              const Text(
-                "Sign up",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold,
-                  color: AppColors.dunkelbraun,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          AuthTitle(text: "Sign up", color: AppColors.dunkelbraun),
+          const SizedBox(height: 24),
+          const CustomTextField(hintText: "E-Mail"),
+          const SizedBox(height: 16),
+          const CustomTextField(hintText: "Passwort", obscureText: true),
+          ForgotPasswordLink(onTap: () {
+            showDialog(
+              context: context,
+              builder: (c) => AlertDialog(
+                title: const Text("Passwort vergessen"),
+                content: const Text(
+                  "Bitte E-Mail oder Telefonnummer eingeben, um das Passwort zurückzusetzen.",
                 ),
-              ),
-              const SizedBox(height: 24),
-              const CustomTextField(hintText: "E-Mail"),
-              const SizedBox(height: 16),
-              const CustomTextField(
-                hintText: "Passwort",
-                obscureText: true,
-              ),
-              ForgotPasswordLink(
-                  onTap: () => _showForgotPasswordDialog(context)),
-              const SizedBox(height: 16),
-              CustomButton(
-                label: "Sign up",
-                onPressed: () {
-                  Navigator.pushReplacementNamed(context, AppRoutes.splash2);
-                },
-              ),
-              const SizedBox(height: 24),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset("assets/icons/google.png", height: 24),
-                  const SizedBox(width: 16),
-                  Image.asset("assets/icons/apple.png", height: 24),
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.of(c).pop(),
+                    child: const Text("OK"),
+                  ),
                 ],
               ),
-              const SizedBox(height: 16),
-              GestureDetector(
-                onTap: openNoteKeyWebsite,
-                child: const Text(
-                  "NOTEkey.de",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 12,
-                    decoration: TextDecoration.underline,
-                    color: AppColors.dunkelbraun,
-                  ),
-                ),
-              ),
-            ],
+            );
+          }),
+          const SizedBox(height: 16),
+          CustomButton(
+            label: "Sign up",
+            onPressed: () =>
+                Navigator.pushReplacementNamed(context, AppRoutes.splash2),
           ),
-        ),
+          const SizedBox(height: 24),
+          const SocialLoginRow(),
+          const SizedBox(height: 16),
+          GestureDetector(
+            onTap: openNoteKeyWebsite,
+            child: const Text(
+              "NOTEkey.de",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 12,
+                decoration: TextDecoration.underline,
+                color: AppColors.dunkelbraun,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
