@@ -17,7 +17,11 @@ class BasicTopBar extends StatelessWidget implements PreferredSizeWidget {
   });
 
   @override
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight + 36);
+
+  @override
   Widget build(BuildContext context) {
+    // Statusbar-Style
     SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(
         statusBarColor: AppColors.dunkelbraun,
@@ -38,7 +42,7 @@ class BasicTopBar extends StatelessWidget implements PreferredSizeWidget {
               top: 6,
               child: IconButton(
                 icon: const Icon(Icons.arrow_back, color: AppColors.hellbeige),
-                onPressed: () => Navigator.of(context).pop(),
+                onPressed: () => Navigator.of(context).maybePop(),
               ),
             ),
           Center(
@@ -60,14 +64,22 @@ class BasicTopBar extends StatelessWidget implements PreferredSizeWidget {
               top: 6,
               child: IconButton(
                 icon: const Icon(Icons.menu, color: AppColors.hellbeige),
-                onPressed: () {},
+                onPressed: () {
+                  // wichtig: EndDrawer des umgebenden Scaffold öffnen
+                  final scaffold = Scaffold.maybeOf(context);
+                  if (scaffold?.hasEndDrawer ?? false) {
+                    scaffold!.openEndDrawer();
+                  } else {
+                    // Fallback: nichts passiert -> optional SnackBar
+                    // ScaffoldMessenger.of(context).showSnackBar(
+                    //   const SnackBar(content: Text('Kein EndDrawer gefunden')),
+                    // );
+                  }
+                },
               ),
             ),
         ],
       ),
     );
   }
-
-  @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight + 36);
 }

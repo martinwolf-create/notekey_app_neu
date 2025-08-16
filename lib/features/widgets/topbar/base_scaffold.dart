@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'basic_topbar.dart';
 import 'hamburger/hamburger_button.dart';
+import 'package:notekey_app/features/widgets/topbar/hamburger/hamburger_drawer.dart';
 
 class BaseScaffold extends StatelessWidget {
   final Widget child;
