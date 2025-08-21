@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:notekey_app/features/routes/app_routes.dart';
 import 'home_button.dart';
 
 class HomeButtonGrid extends StatelessWidget {
@@ -10,8 +11,10 @@ class HomeButtonGrid extends StatelessWidget {
       alignment: WrapAlignment.center,
       spacing: 40,
       runSpacing: 40,
-      children: const [
-        HomeButton(label: 'Chat'),
+      children: [
+        HomeButton(
+            label: 'Chat',
+            onTap: () => Navigator.of(context).pushNamed(AppRoutes.chat)),
         HomeButton(label: 'Game'),
         HomeButton(label: 'Libery'),
         HomeButton(label: 'NOTEscan'),

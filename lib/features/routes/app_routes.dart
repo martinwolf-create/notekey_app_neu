@@ -6,6 +6,7 @@ import 'package:notekey_app/features/presentation/screens/splash_theater/splash_
 import 'package:notekey_app/features/presentation/screens/homescreen/home_screen.dart';
 import 'package:notekey_app/features/presentation/screens/startscreen/startscreen.dart';
 import 'package:notekey_app/features/presentation/screens/sigupsreen/signup_screen.dart';
+import 'package:notekey_app/features/chat/chat_home_screen.dart';
 
 class AppRoutes {
   static const String splash = "/splash";
@@ -16,6 +17,7 @@ class AppRoutes {
 
   static const String home = "/home";
   static const String profil = "/profil";
+  static const String chat = "/chat";
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -31,6 +33,8 @@ class AppRoutes {
         return MaterialPageRoute(builder: (_) => const SplashTheater2Screen());
       case home:
         return MaterialPageRoute(builder: (_) => HomeScreen());
+      case chat:
+        return MaterialPageRoute(builder: (_) => const ChatHomeScreen());
       case profil:
         return MaterialPageRoute(builder: (_) => ProfilScreen());
 

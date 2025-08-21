@@ -5,7 +5,7 @@ class ChatMessage {
   final String text;
   final DateTime sentAt;
 
-  ChatMessage({
+  const ChatMessage({
     required this.id,
     required this.chatId,
     required this.senderId,
@@ -19,12 +19,13 @@ class ChatMessage {
     String? senderId,
     String? text,
     DateTime? sentAt,
-  }) =>
-      ChatMessage(
-        id: id ?? this.id,
-        chatId: chatId ?? this.chatId,
-        senderId: senderId ?? this.senderId,
-        text: text ?? this.text,
-        sentAt: sentAt ?? this.sentAt,
-      );
+  }) {
+    return ChatMessage(
+      id: id ?? this.id,
+      chatId: chatId ?? this.chatId,
+      senderId: senderId ?? this.senderId,
+      text: text ?? this.text,
+      sentAt: sentAt ?? this.sentAt,
+    );
+  }
 }

@@ -1,10 +1,6 @@
-import 'package:notekey_app/features/chat/domain/chat_message.dart';
-import 'package:notekey_app/features/chat/domain/chat_repository.dart';
+import '../data/in_memory_chat_repository.dart';
+import '../domain/chat_message.dart';
 
-class GetChatHistory {
-  final ChatRepository repo;
-  GetChatHistory(this.repo);
-
-  Future<List<ChatMessage>> call(String chatId, {int limit = 50}) =>
-      repo.getHistory(chatId, limit: limit);
+Future<List<ChatMessage>> getHistory(String chatId, {int limit = 50}) {
+  return InMemoryChatRepository.instance.getHistory(chatId, limit: limit);
 }

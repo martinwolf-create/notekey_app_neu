@@ -1,23 +1,15 @@
-import 'package:notekey_app/features/chat/domain/chat_message.dart';
-import 'package:notekey_app/features/chat/domain/chat_repository.dart';
+import '../data/in_memory_chat_repository.dart';
+import '../domain/chat_message.dart';
 
-class SendMessage {
-  final ChatRepository repo;
-  SendMessage(this.repo);
-
-  Future<void> call({
-    required String id,
-    required String chatId,
-    required String senderId,
-    required String text,
-    DateTime? sentAt,
-  }) {
-    return repo.sendMessage(ChatMessage(
-      id: id,
-      chatId: chatId,
-      senderId: senderId,
-      text: text,
-      sentAt: sentAt ?? DateTime.now(),
-    ));
-  }
+Future<void> sendMessage(String chatId, String text) {
+  final repo = InMemoryChatRepository.instance;
+  final me = repo.currentUser();
+  final msg = ChatMessage(
+    id: 'm-${DateTime.now().microsecondsSinceEpoch}',
+    chatId: chatId,
+    senderId: me.id,
+    text: text,
+    sentAt: DateTime.now(),
+  );
+  return repo.sendMessage(msg);
 }

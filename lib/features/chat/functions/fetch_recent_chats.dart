@@ -1,9 +1,12 @@
-import 'package:notekey_app/features/chat/domain/chat_repository.dart';
+import '../data/in_memory_chat_repository.dart';
+import '../domain/chat_thread.dart';
 
-class FetchRecentChats {
-  final ChatRepository repo;
-  FetchRecentChats(this.repo);
-
-  Future<List<String>> call({int limit = 10}) =>
-      repo.fetchRecentChatIds(limit: limit);
+Future<List<ChatThread>> fetchRecentChats({int limit = 10}) async {
+  final repo = InMemoryChatRepository.instance;
+  final ids = await repo.fetchRecentChatIds(limit: limit);
+  final out = <ChatThread>[];
+  for (final id in ids) {
+    out.add(await repo.getThread(id));
+  }
+  return out;
 }

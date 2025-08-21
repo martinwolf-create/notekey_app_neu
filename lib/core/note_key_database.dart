@@ -21,7 +21,7 @@ class InMemoryNoteKeyDatabase implements DatabaseRepository {
   static final InMemoryNoteKeyDatabase instance = InMemoryNoteKeyDatabase._();
 
   // repos
-  final InMemoryChatRepository _chat = InMemoryChatRepository();
+  final InMemoryChatRepository _chat = InMemoryChatRepository.instance;
   final InMemoryPostRepository _posts = InMemoryPostRepository();
   final InMemoryEventRepository _events = InMemoryEventRepository();
   final InMemoryCalendarRepository _calendar = InMemoryCalendarRepository();
