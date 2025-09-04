@@ -13,72 +13,76 @@ class BasicTopBar extends StatelessWidget implements PreferredSizeWidget {
     required this.title,
     this.showBack = false,
     this.showMenu = false,
-    this.titlePadding = const EdgeInsets.only(top: 12),
+    this.titlePadding = const EdgeInsets.only(top: 0),
   });
 
+  // höhe und co der toolbar
   @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight + 36);
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 
   @override
   Widget build(BuildContext context) {
-    // Statusbar-Style
-    SystemChrome.setSystemUIOverlayStyle(
-      const SystemUiOverlayStyle(
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: const SystemUiOverlayStyle(
         statusBarColor: AppColors.dunkelbraun,
         statusBarIconBrightness: Brightness.light,
         statusBarBrightness: Brightness.dark,
       ),
-    );
-
-    return Container(
-      color: AppColors.dunkelbraun,
-      padding: const EdgeInsets.only(top: 36),
-      height: kToolbarHeight + 36,
-      child: Stack(
-        children: [
-          if (showBack)
-            Positioned(
-              left: 16,
-              top: 6,
-              child: IconButton(
-                icon: const Icon(Icons.arrow_back, color: AppColors.hellbeige),
-                onPressed: () => Navigator.of(context).maybePop(),
-              ),
-            ),
-          Center(
-            child: Padding(
-              padding: titlePadding,
-              child: Text(
-                title,
-                style: const TextStyle(
-                  color: AppColors.hellbeige,
-                  fontSize: 20,
-                  fontWeight: FontWeight.w600,
+      child: Material(
+        color: AppColors.dunkelbraun,
+        child: SafeArea(
+          top: true,
+          bottom: false,
+          child: SizedBox(
+            height: kToolbarHeight,
+            child: Stack(
+              children: [
+                if (showBack)
+                  Positioned(
+                    left: 8,
+                    top: 0,
+                    bottom: 0,
+                    child: IconButton(
+                      icon: const Icon(Icons.arrow_back_ios_new,
+                          color: AppColors.hellbeige),
+                      onPressed: () => Navigator.of(context).maybePop(),
+                      tooltip: 'Zurück',
+                    ),
+                  ),
+                Center(
+                  child: Padding(
+                    padding: titlePadding,
+                    child: Text(
+                      title,
+                      style: const TextStyle(
+                        color: AppColors.hellbeige,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
                 ),
-              ),
+                if (showMenu)
+                  Positioned(
+                    right: 8,
+                    top: 0,
+                    bottom: 0,
+                    child: IconButton(
+                      icon: const Icon(Icons.menu_rounded,
+                          color: AppColors.hellbeige),
+                      tooltip: 'Menü',
+                      onPressed: () {
+                        final scaffold = Scaffold.maybeOf(context);
+                        if (scaffold?.hasEndDrawer ?? false) {
+                          scaffold!.openEndDrawer();
+                        }
+                      },
+                    ),
+                  ),
+              ],
             ),
           ),
-          if (showMenu)
-            Positioned(
-              right: 16,
-              top: 6,
-              child: IconButton(
-                icon: const Icon(Icons.menu, color: AppColors.hellbeige),
-                onPressed: () {
-                  // wichtig: EndDrawer des umgebenden Scaffold öffnen
-                  final scaffold = Scaffold.maybeOf(context);
-                  if (scaffold?.hasEndDrawer ?? false) {
-                    scaffold!.openEndDrawer();
-                  } else {
-                    // Fallback: nichts passiert -> optional SnackBar
-                    // ScaffoldMessenger.of(context).showSnackBar(
-                    //   const SnackBar(content: Text('Kein EndDrawer gefunden')),
-                    // );
-                  }
-                },
-              ),
-            ),
-        ],
+        ),
       ),
     );
   }

@@ -48,7 +48,7 @@ class SignUpScreen extends StatelessWidget {
           CustomButton(
             label: "Sign up",
             onPressed: () =>
-                Navigator.pushReplacementNamed(context, AppRoutes.splash2),
+                Navigator.pushReplacementNamed(context, AppRoutes.splash),
           ),
           const SizedBox(height: 24),
           const SocialLoginRow(),

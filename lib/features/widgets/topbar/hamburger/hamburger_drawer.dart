@@ -12,12 +12,12 @@ class HamburgerDrawer extends StatelessWidget {
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
-          DrawerHeader(
-            decoration: const BoxDecoration(color: AppColors.dunkelbraun),
-            child: const Align(
+          const DrawerHeader(
+            decoration: BoxDecoration(color: AppColors.dunkelbraun),
+            child: Align(
               alignment: Alignment.bottomLeft,
               child: Text(
-                'Menü',
+                "Menü",
                 style: TextStyle(
                   color: AppColors.weiss,
                   fontSize: 22,
@@ -26,18 +26,54 @@ class HamburgerDrawer extends StatelessWidget {
               ),
             ),
           ),
-          ListTile(
-            leading: const Icon(Icons.logout, color: AppColors.dunkelbraun),
-            title: const Text('Logout'),
+          _tile(
+            context,
+            icon: Icons.person,
+            label: "Profil",
             onTap: () {
-              // Menü schließen
               Navigator.of(context).maybePop();
-              // Zur Startanimation
+              // Falls Route vorhanden:
+              if (Navigator.canPop(context)) {
+                // optional
+              }
+              Navigator.pushNamed(
+                  context, AppRoutes.profil); // TODO: Route sicherstellen
+            },
+          ),
+          _tile(
+            context,
+            icon: Icons.settings,
+            label: "Settings",
+            onTap: () {
+              Navigator.of(context).maybePop();
+              Navigator.pushNamed(
+                  context, AppRoutes.settings); // TODO: Route sicherstellen
+            },
+          ),
+          const Divider(height: 1),
+          _tile(
+            context,
+            icon: Icons.logout,
+            label: "Logout",
+            onTap: () {
+              Navigator.of(context).maybePop();
+              // TODO: echte Logout-Logik (Session clear etc.)
               Navigator.pushReplacementNamed(context, AppRoutes.splash);
             },
           ),
         ],
       ),
+    );
+  }
+
+  ListTile _tile(BuildContext context,
+      {required IconData icon,
+      required String label,
+      required VoidCallback onTap}) {
+    return ListTile(
+      leading: Icon(icon, color: AppColors.dunkelbraun),
+      title: Text(label, style: const TextStyle(color: AppColors.dunkelbraun)),
+      onTap: onTap,
     );
   }
 }

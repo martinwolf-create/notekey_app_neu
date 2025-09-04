@@ -41,7 +41,7 @@ class HomeScreen extends StatelessWidget {
         currentIndex: 0,
         onTap: (index) {
           if (index == 3)
-            Navigator.pushNamed(context, AppRoutes.profil); // 👈 öffnet Profil
+            Navigator.pushNamed(context, AppRoutes.profil); // Profil
         },
       ),
 

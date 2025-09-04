@@ -1,5 +1,5 @@
 import 'package:notekey_app/features/calendar/domain/calendar_entry.dart';
-import 'package:notekey_app/features/calendar/domain/calendar_repository.dart';
+import 'package:notekey_app/features/calendar/data/calendar_repository.dart';
 
 class ListMonthEntries {
   final CalendarRepository repo;

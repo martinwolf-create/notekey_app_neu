@@ -3,7 +3,7 @@ import 'user_profile.dart';
 class ChatThread {
   final String id;
   final bool isGroup;
-  final String title; // Gruppenname oder abgeleiteter DM-Name
+  final String title;
   final List<UserProfile> participants;
   final DateTime updatedAt;
   final String? lastMessage;

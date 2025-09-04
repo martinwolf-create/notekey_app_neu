@@ -13,13 +13,17 @@ class HomeButtonGrid extends StatelessWidget {
       runSpacing: 40,
       children: [
         HomeButton(
-            label: 'Chat',
-            onTap: () => Navigator.of(context).pushNamed(AppRoutes.chat)),
-        HomeButton(label: 'Game'),
-        HomeButton(label: 'Libery'),
-        HomeButton(label: 'NOTEscan'),
-        HomeButton(label: 'Learn'),
-        HomeButton(label: 'Forum'),
+            label: "Chat",
+            onTap: () =>
+                Navigator.of(context).pushNamed(AppRoutes.chat)), //chat
+        HomeButton(label: "Game"),
+        HomeButton(label: "Libery"),
+        HomeButton(label: "NOTEscan"),
+        HomeButton(label: "Learn"),
+        HomeButton(
+          label: "Forum",
+          onTap: () => Navigator.of(context).pushNamed(AppRoutes.forum),
+        ),
       ],
     );
   }

@@ -27,14 +27,11 @@ class InMemoryChatRepository implements ChatRepository {
 
   UserProfile get _me => _users["me"]!;
 
-  // ---- Threads & Messages ----
   final Map<String, ChatThread> _threads = {};
   final Map<String, List<ChatMessage>> _messages = {};
 
-  // Streams pro Chat
   final Map<String, StreamController<List<ChatMessage>>> _controllers = {};
 
-  // ===== Helpers =====
   void _ensureController(String chatId) {
     _controllers.putIfAbsent(
       chatId,
@@ -44,8 +41,7 @@ class InMemoryChatRepository implements ChatRepository {
 
   void _push(String chatId) {
     _ensureController(chatId);
-    _controllers[chatId]!
-        .add(List.unmodifiable(_messages[chatId] ?? const []));
+    _controllers[chatId]!.add(List.unmodifiable(_messages[chatId] ?? const []));
   }
 
   String _rid(String pfx) =>
@@ -56,9 +52,7 @@ class InMemoryChatRepository implements ChatRepository {
     _threads[chatId] = t.copyWith(updatedAt: at, lastMessage: last);
   }
 
-  // Seed 
   void _seed() {
-    // DM mit Anna
     final dmId = _rid("dm");
     final anna = _users["u1"]!;
     _threads[dmId] = ChatThread(
@@ -130,7 +124,7 @@ class InMemoryChatRepository implements ChatRepository {
     ];
   }
 
-  // ChatRepository 
+  // ChatRepository
 
   @override
   Future<void> sendMessage(ChatMessage message) async {
@@ -163,13 +157,12 @@ class InMemoryChatRepository implements ChatRepository {
   @override
   Stream<List<ChatMessage>> watchMessages(String chatId) {
     _ensureController(chatId);
-    Future.microtask(() => _push(chatId)); // sofort aktuellen Stand liefern
+    Future.microtask(() => _push(chatId));
     return _controllers[chatId]!.stream;
   }
 
   @override
-  Future<List<ChatMessage>> getHistory(String chatId,
-      {int limit = 50}) async {
+  Future<List<ChatMessage>> getHistory(String chatId, {int limit = 50}) async {
     final list = _messages[chatId] ?? const <ChatMessage>[];
     if (list.length <= limit) return List.unmodifiable(list);
     return List.unmodifiable(list.sublist(list.length - limit));
@@ -191,9 +184,7 @@ class InMemoryChatRepository implements ChatRepository {
 
   @override
   Future<String> ensureDirectThread(String otherUserId) async {
-    final existing = _threads.values
-        .where((t) => !t.isGroup)
-        .firstWhere(
+    final existing = _threads.values.where((t) => !t.isGroup).firstWhere(
           (t) => t.participants
               .map((e) => e.id)
               .toSet()
@@ -226,8 +217,7 @@ class InMemoryChatRepository implements ChatRepository {
   }
 
   @override
-  Future<String> createGroupThread(
-      String name, List<String> memberIds) async {
+  Future<String> createGroupThread(String name, List<String> memberIds) async {
     final id = _rid("gp");
     final members = <UserProfile>[_me];
     for (final m in memberIds) {
@@ -253,8 +243,7 @@ class InMemoryChatRepository implements ChatRepository {
   UserProfile currentUser() => _me;
 
   @override
-  List<UserProfile> allUsers() =>
-      _users.values.toList(growable: false);
+  List<UserProfile> allUsers() => _users.values.toList(growable: false);
 
   String _autoReply(String _) {
     const canned = [

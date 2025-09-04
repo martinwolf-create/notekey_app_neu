@@ -1,8 +1,10 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:notekey_app/features/routes/app_routes.dart';
-import 'package:notekey_app/features/themes/colors.dart';
-import 'package:notekey_app/features/presentation/screens/startscreen/startscreen.dart';
+
+import 'package:notekey_app/features/presentation/screens/homescreen/home_screen.dart';
+import 'package:notekey_app/features/themes/theme_creative.dart';
+import 'package:notekey_app/features/themes/colors_creative.dart';
 
 class SplashTheaterScreen extends StatefulWidget {
   const SplashTheaterScreen({super.key});
@@ -22,7 +24,7 @@ class _SplashTheaterScreenState extends State<SplashTheaterScreen>
   @override
   void initState() {
     super.initState();
-
+    // Animation A
     _controllerA = AnimationController(
       duration: const Duration(seconds: 3),
       vsync: this,
@@ -48,7 +50,7 @@ class _SplashTheaterScreenState extends State<SplashTheaterScreen>
         weight: 40,
       ),
     ]).animate(_controllerA);
-
+    // Animation B
     _controllerB = AnimationController(
       duration: const Duration(seconds: 3),
       vsync: this,
@@ -79,15 +81,10 @@ class _SplashTheaterScreenState extends State<SplashTheaterScreen>
     _controllerB.forward();
 
     Timer(const Duration(seconds: 4), () {
-      Navigator.pushReplacement(
-        context,
-        PageRouteBuilder(
-          pageBuilder: (context, animation, secondaryAnimation) =>
-              const StartScreen(),
-          transitionDuration: Duration.zero,
-          reverseTransitionDuration: Duration.zero,
-        ),
-      );
+      if (!mounted) return;
+      Navigator.of(context)
+          .pushReplacementNamed(AppRoutes.home); // 👈 z.B. Home
+      // oder: AppRoutes.start, AppRoutes.profil, AppRoutes.settings
     });
   }
 
@@ -101,7 +98,7 @@ class _SplashTheaterScreenState extends State<SplashTheaterScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.dunkelbraun,
+      backgroundColor: AppColorsCreative.nearBlack,
       body: Stack(
         children: [
           Center(
@@ -115,7 +112,7 @@ class _SplashTheaterScreenState extends State<SplashTheaterScreen>
                     style: TextStyle(
                       fontSize: 42,
                       fontWeight: FontWeight.bold,
-                      color: AppColors.hellbeige,
+                      color: AppColorsCreative.magenta,
                     ),
                   ),
                 ),
@@ -128,7 +125,7 @@ class _SplashTheaterScreenState extends State<SplashTheaterScreen>
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w400,
-                        color: AppColors.hellbeige,
+                        color: AppColorsCreative.violet,
                       ),
                     ),
                   ),
