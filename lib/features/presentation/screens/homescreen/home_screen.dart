@@ -5,8 +5,8 @@ import 'package:notekey_app/features/widgets/topbar/basic_topbar.dart';
 import 'package:notekey_app/features/widgets/bottom_nav/bottom_navigation_bar.dart';
 import 'package:notekey_app/features/widgets/auth/launch_url.dart';
 import 'package:notekey_app/features/widgets/promo/promo_banner.dart';
-import 'package:notekey_app/features/widgets/home_widgets/profile_carousel.dart';
-import 'package:notekey_app/features/widgets/home_widgets/home_button_grid.dart';
+import 'package:notekey_app/features/presentation/screens/homescreen/home_widgets/profile_carousel.dart';
+import 'package:notekey_app/features/presentation/screens/homescreen/home_widgets/home_button_grid.dart';
 import 'package:notekey_app/features/widgets/topbar/hamburger/hamburger_drawer.dart';
 import 'package:notekey_app/features/routes/app_routes.dart';
 
