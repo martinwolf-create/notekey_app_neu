@@ -17,6 +17,7 @@ import 'package:notekey_app/features/presentation/screens/forum/suchfind/suchfin
 import 'package:notekey_app/features/presentation/screens/forum/suchfind/such/such_list_screen.dart';
 
 import 'package:notekey_app/features/presentation/screens/forum/suchfind/find/find_list_screen.dart';
+import 'package:notekey_app/features/presentation/screens/games/memory/memory_start_screen.dart';
 
 class AppRoutes {
   static const String splash = "/splash";
@@ -39,6 +40,8 @@ class AppRoutes {
   static const String suchfindHome = '/suchfind'; // Home mit 2 Buttons
   static const String suchList = '/suchfind/such'; // Suchen
   static const String findList = '/suchfind/find'; // Finden
+
+  static const String memory = '/memory';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -80,6 +83,9 @@ class AppRoutes {
 
       case AppRoutes.todo:
         return MaterialPageRoute(builder: (_) => const TodoScreen());
+
+      case AppRoutes.memory:
+        return MaterialPageRoute(builder: (_) => const MemoryStartScreen());
 
       default:
         return MaterialPageRoute(

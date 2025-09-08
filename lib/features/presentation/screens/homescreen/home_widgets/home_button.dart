@@ -23,7 +23,7 @@ class HomeButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
           boxShadow: const [
             BoxShadow(
-              color: AppColors.schwarz,
+              color: AppColors.dunkelbraun,
               blurRadius: 6,
               offset: Offset(0, 4),
             ),
@@ -33,7 +33,7 @@ class HomeButton extends StatelessWidget {
           child: Text(
             label,
             style: const TextStyle(
-              color: AppColors.weiss,
+              color: AppColors.hellbeige,
               fontSize: 16,
               fontWeight: FontWeight.w500,
             ),

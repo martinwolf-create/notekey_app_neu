@@ -19,7 +19,7 @@ class HamburgerDrawer extends StatelessWidget {
               child: Text(
                 "Menü",
                 style: TextStyle(
-                  color: AppColors.weiss,
+                  color: AppColors.hellbeige,
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
                 ),

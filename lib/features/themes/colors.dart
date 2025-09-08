@@ -1,14 +1,24 @@
 import 'package:flutter/material.dart';
 
+/// Zentrale Farbpalette für NOTEkey.
+/// Wird in allen Screens als `AppColors.xyz` verwendet.
 class AppColors {
-  static const Color hellbeige =
-      Color.fromRGBO(240, 231, 222, 1); // Hintergrund
-  static const Color dunkelbraun =
-      Color.fromRGBO(48, 36, 27, 1); // Text, Button
-  static const Color goldbraun = Color.fromRGBO(170, 124, 80, 1); // Akzente
-  static const Color hellgrau = Color.fromRGBO(221, 221, 221, 1); // optional
-  static const Color giftgruen = Color.fromRGBO(74, 212, 128, 1); // Akzent
+  // Basisfarben (laut deiner Palette)
+  static const Color hellbeige = Color(0xFFFFF9F3);
+  static const Color rosebeige = Color(0xFFF0E7DE);
+  static const Color goldbraun =
+      Color(0xFFA97C50); // falls du AA7C50 nutzt, hier anpassen
+  static const Color dunkelbraun = Color(0xFF3F2B14);
+  static const Color giftgruen = Color(0xFF4AD480);
 
-  static const Color weiss = Color.fromRGBO(255, 255, 255, 1); // Texteingabe
-  static const Color schwarz = Color.fromRGBO(0, 0, 0, 1); // Icons, Text
+  // Komfort-Gradienten für Karten/Buttons
+  static const LinearGradient beigeGradient = LinearGradient(
+    colors: [rosebeige, hellbeige],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+  );
+
+  static const LinearGradient darkToDark = LinearGradient(
+    colors: [dunkelbraun, dunkelbraun],
+  );
 }

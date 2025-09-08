@@ -16,7 +16,11 @@ class HomeButtonGrid extends StatelessWidget {
             label: "Chat",
             onTap: () =>
                 Navigator.of(context).pushNamed(AppRoutes.chat)), //chat
-        HomeButton(label: "Game"),
+        HomeButton(
+            label: "Game",
+            onTap: () =>
+                Navigator.of(context).pushNamed(AppRoutes.memory)), //games
+
         HomeButton(label: "Libery"),
         HomeButton(label: "NOTEscan"),
         HomeButton(label: "Learn"),
