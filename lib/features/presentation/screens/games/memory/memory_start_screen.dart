@@ -49,9 +49,19 @@ class _MemoryStartScreenState extends State<MemoryStartScreen> {
     return Scaffold(
       backgroundColor: AppColors.hellbeige,
       appBar: AppBar(
-        backgroundColor: AppColors.dunkelbraun,
-        title: const Text("Games"),
+        backgroundColor: AppColors.dunkelbraun, // bleibt dunkelbraun
         centerTitle: true,
+        iconTheme: const IconThemeData(
+          // Farbe vom Pfeil
+          color: AppColors.hellbeige,
+        ),
+        title: const Text(
+          "Games",
+          style: TextStyle(
+            color: AppColors.hellbeige, // Schrift hellbeige
+            fontWeight: FontWeight.w800,
+          ),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.fromLTRB(20, 26, 20, 20),

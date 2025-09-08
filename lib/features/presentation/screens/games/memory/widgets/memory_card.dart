@@ -5,8 +5,8 @@ import 'package:notekey_app/features/themes/colors.dart'; // AppColors
 
 /// Memory-Karte mit:
 /// • 3D-Flip (Y-Achse)
-/// • Press-Tilt (leichter Kipp beim Halten)
-/// • Glow bei Match
+/// • Press-Feedback
+
 class MemoryCard extends StatefulWidget {
   final bool revealed;
   final bool matched;
@@ -88,8 +88,8 @@ class _MemoryCardState extends State<MemoryCard> with TickerProviderStateMixin {
           animation: Listenable.merge([_flip, _press]),
           builder: (context, _) {
             final angle = _flip.value * math.pi; // 0..pi
-            final isBack = angle <= math.pi / 2; // bis 90° Rückseite
-            final tilt = _press.value * 0.06; // 0..0.06
+            final isBack = angle <= math.pi / 2; // 90° Rückseite
+            final tilt = _press.value * 0.06; // leichter Tilt beim Press
             final glow = widget.matched ? 22.0 : 14.0;
             final glowOpacity = widget.matched ? .28 : .16;
 
@@ -122,7 +122,7 @@ class _MemoryCardState extends State<MemoryCard> with TickerProviderStateMixin {
                     child: Stack(
                       fit: StackFit.expand,
                       children: [
-                        // Rückseite (dunkelbraun)
+                        // Rückseite (Orange-Gradient)
                         Opacity(
                           opacity: isBack ? 1 : 0,
                           child: DecoratedBox(

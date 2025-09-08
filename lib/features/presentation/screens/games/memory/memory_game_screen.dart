@@ -2,7 +2,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:notekey_app/features/themes/colors.dart'; // AppColors
-import 'package:notekey_app/features/presentation/screens/games/widgets/memory_card.dart';
+import 'package:notekey_app/features/presentation/screens/games/memory/widgets/memory_card.dart';
 
 class MemoryGameScreen extends StatefulWidget {
   final bool vsComputer;
@@ -164,14 +164,26 @@ class _MemoryGameScreenState extends State<MemoryGameScreen> {
     return Scaffold(
       backgroundColor: AppColors.hellbeige,
       appBar: AppBar(
-        backgroundColor: AppColors.dunkelbraun,
+        backgroundColor: AppColors.dunkelbraun, // Appbar dunkelbraun
         centerTitle: true,
-        title: const Text("NOTEkey Memory"),
+        iconTheme: const IconThemeData(
+          
+          color: AppColors.hellbeige, // rechts oben Pfeil
+        ),
+        title: const Text(
+          "NOTEkey Memory",
+          style: TextStyle(
+            color: AppColors.hellbeige, // Titel hellbeige
+            fontWeight: FontWeight.w800,
+          ),
+        ),
         actions: [
           IconButton(
             tooltip: "Neu mischen",
             onPressed: _newGame,
-            icon: const Icon(Icons.refresh_rounded),
+            color: AppColors.hellbeige, // appbar links: Icon(Icons.arrow_back)
+            icon:
+                const Icon(Icons.refresh_rounded), // appbar links: Icon(Icons.arrow_back)
           ),
         ],
       ),
