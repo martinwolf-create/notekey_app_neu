@@ -8,6 +8,7 @@ void main() async {
 
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
+    name: 'NOTEkey-app',
   );
 
   runApp(const MyApp());
