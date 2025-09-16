@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:notekey_app/firebase_options.dart';
 import 'package:notekey_app/features/routes/app_routes.dart';
 import 'package:notekey_app/features/themes/colors.dart';
+import 'package:notekey_app/features/auth/auth_gate.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,7 +20,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: AppRoutes.signin, // Start with the SignIn screen
+      home: const AuthGate(),
+      // Start with the SignIn screen
       onGenerateRoute: AppRoutes.generateRoute,
       theme: ThemeData(
         useMaterial3: true,
