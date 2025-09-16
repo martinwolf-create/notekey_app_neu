@@ -5,7 +5,7 @@ import 'package:notekey_app/features/presentation/screens/splash_theater/splash_
 
 import 'package:notekey_app/features/presentation/screens/homescreen/home_screen.dart';
 import 'package:notekey_app/features/presentation/screens/startscreen/startscreen.dart';
-import 'package:notekey_app/features/presentation/screens/sigupsreen/signup_screen.dart';
+import 'package:notekey_app/features/presentation/screens/signup/signup_screen.dart';
 import 'package:notekey_app/features/chat/chat_home_screen.dart';
 import 'package:notekey_app/features/presentation/screens/settings/settings_screen.dart';
 import 'package:notekey_app/features/presentation/screens/forum/forum_home_screen.dart';
@@ -15,7 +15,8 @@ import 'package:notekey_app/features/presentation/screens/forum/veranstaltung/ve
 import 'package:notekey_app/features/presentation/screens/forum/todo/todo_screen.dart';
 import 'package:notekey_app/features/presentation/screens/forum/suchfind/suchfind_home_screen.dart';
 import 'package:notekey_app/features/presentation/screens/forum/suchfind/such/such_list_screen.dart';
-
+import 'package:notekey_app/features/presentation/screens/forum/suchfind/such/such_edit_screen.dart';
+import 'package:notekey_app/features/presentation/screens/signin/signin_screen.dart';
 import 'package:notekey_app/features/presentation/screens/forum/suchfind/find/find_list_screen.dart';
 import 'package:notekey_app/features/presentation/screens/games/memory/memory_start_screen.dart';
 
@@ -25,6 +26,7 @@ class AppRoutes {
 
   static const String start = "/start";
   static const String signup = "/signup";
+  static const String signin = "/signin";
 
   static const String home = "/home";
   static const String profil = "/profil";
@@ -52,6 +54,8 @@ class AppRoutes {
         return MaterialPageRoute(builder: (_) => const StartScreen());
       case signup:
         return MaterialPageRoute(builder: (_) => const SignUpScreen());
+      case signin:
+        return MaterialPageRoute(builder: (_) => const SignInScreen());
 
       case splash2:
         return MaterialPageRoute(builder: (_) => const SplashTheater2Screen());

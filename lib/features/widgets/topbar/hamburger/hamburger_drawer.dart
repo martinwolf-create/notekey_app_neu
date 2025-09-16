@@ -58,7 +58,7 @@ class HamburgerDrawer extends StatelessWidget {
             onTap: () {
               Navigator.of(context).maybePop();
               // TODO: echte Logout-Logik (Session clear etc.)
-              Navigator.pushReplacementNamed(context, AppRoutes.splash);
+              Navigator.pushReplacementNamed(context, AppRoutes.signin);
             },
           ),
         ],
