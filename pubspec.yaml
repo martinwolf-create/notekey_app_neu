@@ -1,3 +1,4 @@
+# pubspec.yaml
 name: notekey_app
 description: A new Flutter project.
 publish_to: "none"
@@ -7,10 +8,16 @@ environment:
   sdk: ">=3.0.0 <4.0.0"
 
 dependencies:
-  firebase_auth: ^6.0.0
-  firebase_core: ^4.0.0
   flutter:
     sdk: flutter
+
+  # >>> FlutterFire – kompatible Versionen
+  firebase_core: ^3.15.1
+  firebase_auth: ^5.3.1
+  cloud_firestore: ^5.6.12
+  firebase_storage: ^12.4.9
+
+  # Rest
   cupertino_icons: ^1.0.2
   url_launcher: ^6.2.5
   image_picker: ^1.1.2
@@ -19,15 +26,10 @@ dependencies:
   path: ^1.9.0
   webview_flutter: ^4.2.2
 
-
-  
-
 dev_dependencies:
   flutter_test:
     sdk: flutter
-    
   flutter_lints: ^3.0.0
-  
   flutter_launcher_icons: ^0.13.1
 
 flutter:

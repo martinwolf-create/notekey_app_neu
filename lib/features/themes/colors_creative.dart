@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class AppColors {
   static const Color hellbeige =
       Color.fromRGBO(240, 231, 222, 1); // Hintergrund
+  static const rosebeige = Color(0xFFF0E7DE);
   static const Color dunkelbraun =
       Color.fromRGBO(48, 36, 27, 1); // Text, Button
   static const Color goldbraun = Color.fromRGBO(170, 124, 80, 1); // Akzente

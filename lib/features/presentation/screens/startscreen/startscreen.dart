@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:notekey_app/features/themes/colors.dart';
 import 'package:notekey_app/features/widgets/auth/launch_url.dart';
 import '../../../widgets/startscreen_widgets/animation_logo.dart';
-import '../../../widgets/startscreen_widgets/signup_button.dart';
+import '../../../widgets/startscreen_widgets/signin_button.dart';
 import '../../../widgets/startscreen_widgets/headline_text.dart';
 
 class StartScreen extends StatelessWidget {

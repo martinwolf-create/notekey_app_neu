@@ -7,7 +7,7 @@ class SignupButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: () {
-        Navigator.pushNamed(context, "/signup");
+        Navigator.pushNamed(context, "/signin");
       },
       style: ElevatedButton.styleFrom(
         backgroundColor: const Color.fromRGBO(48, 36, 27, 1),
@@ -18,7 +18,7 @@ class SignupButton extends StatelessWidget {
         elevation: 4,
       ),
       child: const Text(
-        "Sign up",
+        "Sign in",
         style: TextStyle(
           color: Color.fromRGBO(255, 255, 255, 1),
           fontSize: 18,

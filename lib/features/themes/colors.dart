@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 class AppColors {
   // Basisfarben (laut deiner Palette)
   static const Color hellbeige = Color(0xFFFFF9F3);
+
   static const Color rosebeige = Color(0xFFF0E7DE);
   static const Color goldbraun =
       Color(0xFFA97C50); // falls du AA7C50 nutzt, hier anpassen

@@ -1,20 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
-import 'package:notekey_app/features/auth/auth_service.dart';
+import 'package:notekey_app/features/auth/auth_repository.dart';
 import 'package:notekey_app/features/routes/app_routes.dart';
 import 'package:notekey_app/features/themes/colors.dart';
 
-import 'package:notekey_app/features/widgets/auth/auth_scaffold.dart';
-import 'package:notekey_app/features/widgets/auth/auth_title.dart';
-import 'package:notekey_app/features/widgets/auth/forgot_password_link.dart';
-import 'package:notekey_app/features/widgets/auth/social_login_row.dart';
-import 'package:notekey_app/features/widgets/common/custom_button.dart';
-import 'package:notekey_app/features/widgets/common/custom_textfield.dart';
-import 'package:notekey_app/features/widgets/auth/launch_url.dart';
-
 class SignInScreen extends StatefulWidget {
-  const SignInScreen({super.key});
+  final AuthRepository auth;
+  const SignInScreen({super.key, required this.auth});
+
   @override
   State<SignInScreen> createState() => _SignInScreenState();
 }
@@ -23,8 +16,6 @@ class _SignInScreenState extends State<SignInScreen> {
   final _emailCtrl = TextEditingController();
   final _pwCtrl = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-  final _auth = AuthService();
-
   bool _loading = false;
   String? _error;
 
@@ -35,49 +26,19 @@ class _SignInScreenState extends State<SignInScreen> {
     super.dispose();
   }
 
-  Future<void> _handleSignIn() async {
-    if (!_formKey.currentState!.validate()) return;
-    setState(() {
-      _loading = true;
-      _error = null;
-    });
-    try {
-      await _auth.signInWithEmail(
-        email: _emailCtrl.text,
-        password: _pwCtrl.text,
-      );
-      if (!mounted) return;
-      Navigator.pushReplacementNamed(
-          context, AppRoutes.home); // Navigate to homescreen
-    } on FirebaseAuthException catch (e) {
-      setState(() => _error = _mapError(e));
-    } finally {
-      if (mounted) setState(() => _loading = false);
-    }
+  String? _vEmail(String? v) {
+    final s = v?.trim() ?? '';
+    if (s.isEmpty) return 'E-Mail eingeben';
+    return RegExp(r'^[^@\s]+@[^@\s]+\.[^@\s]+$').hasMatch(s)
+        ? null
+        : 'Ungültige E-Mail';
   }
 
-  Future<void> _handleForgotPassword() async {
-    final email = _emailCtrl.text.trim();
-    if (email.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Bitte zuerst deine E-Mail eingeben.')),
-      );
-      return;
-    }
-    try {
-      await _auth.sendPasswordReset(email);
-      if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Reset-E-Mail wurde gesendet.')),
-      );
-    } on FirebaseAuthException catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(_mapError(e))),
-      );
-    }
-  }
+  String? _vPw(String? v) => (v == null || v.isEmpty)
+      ? 'Passwort eingeben'
+      : (v.length < 6 ? 'Mind. 6 Zeichen' : null);
 
-  String _mapError(FirebaseAuthException e) {
+  String _map(FirebaseAuthException e) {
     switch (e.code) {
       case 'invalid-email':
         return 'Ungültige E-Mail.';
@@ -93,94 +54,94 @@ class _SignInScreenState extends State<SignInScreen> {
     }
   }
 
-  String? _validateEmail(String? v) {
-    final s = v?.trim() ?? '';
-    if (s.isEmpty) return 'E-Mail eingeben';
-    return RegExp(r'^[^@\s]+@[^@\s]+\.[^@\s]+$').hasMatch(s)
-        ? null
-        : 'Ungültige E-Mail';
+  Future<void> _signIn() async {
+    if (!_formKey.currentState!.validate()) return;
+    setState(() {
+      _loading = true;
+      _error = null;
+    });
+    try {
+      await widget.auth
+          .signInWithEmailAndPassword(_emailCtrl.text, _pwCtrl.text);
+      final ok = await widget.auth.reloadAndIsVerified();
+      if (!mounted) return;
+      Navigator.pushReplacementNamed(
+          context, ok ? AppRoutes.home : AppRoutes.verify);
+    } on FirebaseAuthException catch (e) {
+      setState(() => _error = _map(e));
+    } finally {
+      if (mounted) setState(() => _loading = false);
+    }
   }
 
-  String? _validatePassword(String? v) {
-    if (v == null || v.isEmpty) return 'Passwort eingeben';
-    if (v.length < 6) return 'Mind. 6 Zeichen';
-    return null;
+  Future<void> _reset() async {
+    final email = _emailCtrl.text.trim();
+    if (email.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Bitte E-Mail eingeben.')));
+      return;
+    }
+    await widget.auth.sendPasswordReset(email);
+    if (!mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Reset-E-Mail wurde gesendet.')));
   }
 
   @override
   Widget build(BuildContext context) {
-    return AuthScaffold(
-      backgroundColor: AppColors.hellbeige,
-      child: Form(
-        key: _formKey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            AuthTitle(text: "Sign in", color: AppColors.dunkelbraun),
-            const SizedBox(height: 24),
-
-            CustomTextField(
-              hintText: "E-Mail",
-              controller: _emailCtrl,
-              keyboardType: TextInputType.emailAddress,
-              validator: _validateEmail,
-              textInputAction: TextInputAction.next,
-            ),
-            const SizedBox(height: 16),
-
-            CustomTextField(
-              hintText: "Passwort",
-              controller: _pwCtrl,
-              obscureText: true,
-              validator: _validatePassword,
-              textInputAction: TextInputAction.done,
-            ),
-
-            // Passwort vergessen
-            ForgotPasswordLink(
-              onTap: _loading
-                  ? () {} // statt null
-                  : () {
-                      _handleForgotPassword();
-                    },
-            ),
-
-            const SizedBox(height: 16),
-
-            // 2) Sign in Button
-            CustomButton(
-              label: _loading ? "Bitte warten…" : "Sign in",
-              onPressed: _loading
-                  ? () {} // statt null
-                  : () {
-                      _handleSignIn();
-                    },
-            ),
-
-            if (_error != null) ...[
-              const SizedBox(height: 12),
-              Text(_error!,
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(color: Colors.red)),
-            ],
-
-            const SizedBox(height: 24),
-            const SocialLoginRow(),
-            const SizedBox(height: 16),
-
-            GestureDetector(
-              onTap: openNoteKeyWebsite,
-              child: const Text(
-                "NOTEkey.de",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 12,
-                  decoration: TextDecoration.underline,
-                  color: AppColors.dunkelbraun,
-                ),
-              ),
-            ),
-          ],
+    return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: AppColors.dunkelbraun,
+        onPressed: () => Navigator.pushNamedAndRemoveUntil(
+            context, AppRoutes.memory, (_) => false),
+        child: const Icon(Icons.visibility_off, color: Colors.white),
+      ),
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Form(
+            key: _formKey,
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  const Text('Sign in',
+                      style: TextStyle(
+                          fontSize: 28,
+                          fontWeight: FontWeight.bold,
+                          color: AppColors.dunkelbraun)),
+                  const SizedBox(height: 24),
+                  TextFormField(
+                      controller: _emailCtrl,
+                      decoration: const InputDecoration(labelText: 'E-Mail'),
+                      validator: _vEmail,
+                      keyboardType: TextInputType.emailAddress),
+                  const SizedBox(height: 12),
+                  TextFormField(
+                      controller: _pwCtrl,
+                      decoration: const InputDecoration(labelText: 'Passwort'),
+                      validator: _vPw,
+                      obscureText: true),
+                  Align(
+                      alignment: Alignment.centerRight,
+                      child: TextButton(
+                          onPressed: _loading ? null : _reset,
+                          child: const Text('Passwort vergessen?'))),
+                  const SizedBox(height: 8),
+                  ElevatedButton(
+                      onPressed: _loading ? null : _signIn,
+                      child: Text(_loading ? 'Bitte warten…' : 'Sign in')),
+                  TextButton(
+                      onPressed: () =>
+                          Navigator.pushNamed(context, AppRoutes.signup),
+                      child: const Text('Noch kein Konto? Registrieren')),
+                  if (_error != null) ...[
+                    const SizedBox(height: 8),
+                    Text(_error!,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(color: Colors.red)),
+                  ]
+                ]),
+          ),
         ),
       ),
     );

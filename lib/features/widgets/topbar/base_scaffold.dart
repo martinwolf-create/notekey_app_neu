@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:notekey_app/features/themes/colors.dart';
 import 'basic_topbar.dart';
-import 'hamburger/hamburger_drawer.dart'; // <- behalten
+import 'hamburger/hamburger_drawer.dart';
 
 class BaseScaffold extends StatelessWidget {
   final String appBarTitle;

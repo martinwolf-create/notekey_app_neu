@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:notekey_app/firebase_options.dart';
-import 'package:notekey_app/features/routes/app_routes.dart';
+
 import 'package:notekey_app/features/themes/colors.dart';
+import 'package:notekey_app/features/routes/app_routes.dart';
+
+// Repository-Pattern
+import 'package:notekey_app/features/auth/auth_repository.dart';
+import 'package:notekey_app/features/auth/firebase_auth_repository.dart';
 import 'package:notekey_app/features/auth/auth_gate.dart';
 
 Future<void> main() async {
@@ -11,18 +16,21 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
     name: 'NOTEkey-app',
   );
-  runApp(const MyApp());
+
+  final AuthRepository auth = FirebaseAuthRepository();
+  runApp(MyApp(auth: auth));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final AuthRepository auth;
+  const MyApp({super.key, required this.auth});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: const AuthGate(),
-      // Start with the SignIn screen
-      onGenerateRoute: AppRoutes.generateRoute,
+      home: AuthGate(auth: auth),
+      onGenerateRoute: (s) => AppRoutes.generateRoute(s, auth),
       theme: ThemeData(
         useMaterial3: true,
         scaffoldBackgroundColor: AppColors.hellbeige,
